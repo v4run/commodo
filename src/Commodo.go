@@ -90,7 +90,7 @@ const TABLEEND = `
 
 const ITEM = `
 	<tr>
-		<td><img src=data:image/png;base64,{{.Icon}} /> <a href={{.Name}}>{{.Name}}</a></td>
+		<td><img src=data:image/png;base64,{{.Icon}} /> <a href="{{.Name}}">{{.Name}}</a></td>
 		<td>{{.Size}}</td>
 		<td>{{.LastModified}}</td>
 	</tr>`
@@ -160,15 +160,15 @@ func (handler *fileServerHandler) ServeHTTP(writer http.ResponseWriter, request 
 	}
 	defer f.Close()
 
-	url := request.URL.Path
+	reqUrl := request.URL.Path
 	if dir.IsDir() {
-		if url[len(url)-1] != '/' { // show contents of directory
-			localRedirect(writer, request, path.Base(url)+"/")
+		if reqUrl[len(reqUrl)-1] != '/' { // show contents of directory
+			localRedirect(writer, request, path.Base(reqUrl)+"/")
 			return
 		}
 	} else {
-		if url[len(url)-1] == '/' { // show file even if a / is found after filename
-			localRedirect(writer, request, "../"+path.Base(url))
+		if reqUrl[len(reqUrl)-1] == '/' { // show file even if a / is found after filename
+			localRedirect(writer, request, "../"+path.Base(reqUrl))
 			return
 		}
 	}
@@ -201,7 +201,7 @@ func (handler *fileServerHandler) ServeHTTP(writer http.ResponseWriter, request 
 					// folders += fmt.Sprintf()
 				} else {
 					// if image, found := icons[filepath.Ext(d.Name())]; found {
-					// 	files += fmt.Sprintf("<span class = 'entsry' ><img src=data:image/png;base64,"+image+" /> <a href=\"%s\">%s</a></span><br>\n", name, name)
+					// files += fmt.Sprintf("<span class = 'entry' ><img src=data:image/png;base64,"+image+" /> <a href=\"%s\">%s</a></span><br>\n", name, name)
 					// } else {
 					// files += fmt.Sprintf("<img src=data:image/png;base64,"+icons["file"]+" /> <a href=\"%s\">%s</a><br>\n", name, name)
 					//
@@ -210,9 +210,9 @@ func (handler *fileServerHandler) ServeHTTP(writer http.ResponseWriter, request 
 				}
 			}
 		}
-		fmt.Fprintf(writer, folders.String())
-		fmt.Fprintf(writer, files.String())
-		fmt.Fprintf(writer, TABLEEND)
+		fmt.Fprint(writer, folders.String())
+		fmt.Fprint(writer, files.String())
+		fmt.Fprint(writer, TABLEEND)
 	} else {
 		if request.Method != "HEAD" {
 			io.CopyN(writer, f, dir.Size())
