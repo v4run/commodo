@@ -68,7 +68,7 @@ var (
 	icons = map[string]string{ // Icons for different file types
 		"image":     "R0lGODlhEAAQAPcAAEKU50Kl91JCQmNCKWNjY2sxIWtjtWtzpXOEtXOl53O173uMxnuUxnul3oQAhIRzpYSczoStzoSt3oxaMYyEtYyUtZSEpZSUxpSlzpTG95yl1qWElKWUlKW956XO960xKa1rIa2Ura21/63W/7UxELVaMbVzQrWEa7WclLXW/72Me73O/8aclMbW/8bn/84xGM6Uc9ZCGNacc9alc9be59bv/95KId6UWt61hN7n7+dSIeeUUufOhOfn5++EOe/Ge+/v9+/3//e9Y/fGc/9rMf9zMf+EOf+EUv+MQv+UQv+UY/+tUv+1Wv/GY//We//enP/ne//nhP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////yH+EkR1c3RpbiBGcmllc2VuaGFobgAh+QQBAAAOACwAAAAAEAAQAAAIwgAlCBw4kICDgwglSFnIUIoEBQYROlDYcGGAAAAiHqTYMEiLFiIQaFSohAgRJEuaBKlRY8VIKUdKFEnC5MmQJRhcJpTyoQCJFzF06LABQefGIDsmgPBhRIgRHxGMTgQyw8SAGzucOLkhQSqEHixUCDghg8cPGA2kMsgR4oGBDTyiQEHRwIPGBTkuULBggQOOHxYS2EWIgEaNESM8eMjAeEQHjYVruJicojLixwgPaNisAcOFzxcqUNDogIDp06hNIwwIADs=",
 		"video":     "R0lGODlhEAAQAMQfAN/f3zw8PEpKSkBAQBQUFMPDw+bm5hwcHNvb20tLS8bGxlhYWKSkpDMzM2traxgYGERERLKyslNTUz4+PkhISBkZGXZ2dkZGRikpKTs7Ozg4OMzMzP///wsLCwAAAAAAACH5BAEAAB8ALAAAAAAQABAAAAVi4CeOJMBxAFmenncWK9eyLgeLs1x7A6CQOV5ks1HhMAwiwmAceTrQqLTjGXUcFsEiEDgIIIJHxxqQTBKaTIMyuFTGImhrTodaqfQ6/CPPz+1xeH5Pex0EU1KHTohTVU2PIiEAOw==",
-		"music":     "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAqFJREFUeNp0Us9PE1EQnre77W5Zty1SWlD5YY1RxJig0YSTHIheTQz1P/BC5OBFE6PEK4kJRogelQux4sEE46UXLhghGIWQaGJYEVqbbbW4LVu23d3nvN1CCwkv+bL75s18880PQimFRAoOHlr7JhEziPcI46BTchCAg0NOKrU0sbKi9mtaIek4Tg5NrxFDiKZGP+Ewgnj82B38jCwvr/XzPDcUiYRvxmLhRCQSAo7j5vBtYI/AMOi+YA51+XwCbW0NJePx9plCofSgUCjeZWT4fG1w8NLori9hPeh7Xj1AQKiqfn1MCEkEg3JPNNpsRKPh2UDAv9uPbRbLeuASXHhmQC7PNSqgjrNNTPMnu/YiEkg2pChyT0tLELq7293kb6/XmtgcsqGri4cqCmEwTYBKRQZCZPa8ihjFROd0vXReVTP3slkbNM2ul3B1qgg+KQA7Ozz8zlJAEyqghDno/77sK0+SToIoypQQIGv3xf1TCAQIdHYQMMoAjuPZgsEzsLnxvaamFdU1oTqWhNbHSKkz4NjWGDbvoiBwvKIQe2+V4AiIGEj5MGh5bwVYLCqsE+h/temOeFvb0YgPy6iClrVUTOk6lEu6p05yoPOEBYYp1QgaFimfTctKswL6loHQQRDEp7zgQycbzLIBflFynX2CA2HJws4JUKvAm8LWH+3R8sf54urSYjqX2RyxbXsiPfsEfr0bc52QaMCyKgu2VbWoXaGEVm2eWHUFjm2PVz6/GTd5Hky/COn5qfpOxM6C1NU3fbr3VFvsuAxGyYSN9Zy6/WMB4NYNb4zEq5dnKhH+Gti/+xC8PfOt9/IVhV20TAZ21pYebr4afoGx+cYxMgLJbbuHwG6JpdXU5GJJHxYEoUjWP70sz01+QHMLa99/AQYAohQjWPbGXSYAAAAASUVORK5CYII=",
+		"audio":     "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAqFJREFUeNp0Us9PE1EQnre77W5Zty1SWlD5YY1RxJig0YSTHIheTQz1P/BC5OBFE6PEK4kJRogelQux4sEE46UXLhghGIWQaGJYEVqbbbW4LVu23d3nvN1CCwkv+bL75s18880PQimFRAoOHlr7JhEziPcI46BTchCAg0NOKrU0sbKi9mtaIek4Tg5NrxFDiKZGP+Ewgnj82B38jCwvr/XzPDcUiYRvxmLhRCQSAo7j5vBtYI/AMOi+YA51+XwCbW0NJePx9plCofSgUCjeZWT4fG1w8NLori9hPeh7Xj1AQKiqfn1MCEkEg3JPNNpsRKPh2UDAv9uPbRbLeuASXHhmQC7PNSqgjrNNTPMnu/YiEkg2pChyT0tLELq7293kb6/XmtgcsqGri4cqCmEwTYBKRQZCZPa8ihjFROd0vXReVTP3slkbNM2ul3B1qgg+KQA7Ozz8zlJAEyqghDno/77sK0+SToIoypQQIGv3xf1TCAQIdHYQMMoAjuPZgsEzsLnxvaamFdU1oTqWhNbHSKkz4NjWGDbvoiBwvKIQe2+V4AiIGEj5MGh5bwVYLCqsE+h/temOeFvb0YgPy6iClrVUTOk6lEu6p05yoPOEBYYp1QgaFimfTctKswL6loHQQRDEp7zgQycbzLIBflFynX2CA2HJws4JUKvAm8LWH+3R8sf54urSYjqX2RyxbXsiPfsEfr0bc52QaMCyKgu2VbWoXaGEVm2eWHUFjm2PVz6/GTd5Hky/COn5qfpOxM6C1NU3fbr3VFvsuAxGyYSN9Zy6/WMB4NYNb4zEq5dnKhH+Gti/+xC8PfOt9/IVhV20TAZ21pYebr4afoGx+cYxMgLJbbuHwG6JpdXU5GJJHxYEoUjWP70sz01+QHMLa99/AQYAohQjWPbGXSYAAAAASUVORK5CYII=",
 		"document":  "R0lGODlhEAAQAKIFAIWFhYSEhAAAAMbGxv///////wAAAAAAACH5BAEAAAUALAAAAAAQABAAAAM9WBXcrnCRSWcQUY7NSQAYFFSVYIYapxIDOpJVK7JqJysvPN1pPbAuHYU38m2AMyESR/MtJUqiUeU6Wa+FBAA7",
 		"web":       "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAATdJREFUeNpifOqtlsDAwDCfgQwgvfUWIxOQfsBAAWCiQO8BEMECxBdgIvypVQzc/vF4db2tjGX4efkUnM8C9McHYDiAOf++fgbTv+9dZ/gPZaODfwjxDzAXYICvmxYyfNuznpAXLiIbAPKGwa/LJ4FUDgOXcxADs5gMVl2fl01G4bMgOwcG2HTNwBgd/H31FNmABxhe+H3vBjiQsAHh9sUMf18+RRZCMeAgEDv8+/oJJYThcc3NR3w6kNpyk0F83j4GdqgXmMWlGThdAsHsP69wu+ADIpo+AQNQGuxkjDBA8gIw+h+gxwIYvM4LYOCwcAG7AESDDPxxYi/Dj+N7GH5h8R4LNlu+blwIxnjABfQwADlnAZEZC6R5IozDiC4LTNYGoBgBYn8oDQqfDdCY2gBK+sjqAQIMACfPddVHcozkAAAAAElFTkSuQmCC",
 		"develop":   "R0lGODlhEAAQALMAAI6Ojh4eHvv7+/b29vz8/Pn5+fj4+Pr6+iUlJUBAQHZ2dv///wAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARKcKVJK1gYp8z1zVvHJZ+EKeiiqCipnWq8rmE4y3F9pnOqi51fb2gq3o5FG+4mZBF/QNDLKfNpCAJF9qAoKAyKQS0RQJjP5sBkEQEAOw==",
@@ -93,7 +93,7 @@ type item struct {
 	Size         string
 }
 
-const DATEFORMAT = "Mon, Jan _2, 3:04:02 PM 2006"
+const DATEFORMAT = "Mon Jan _2 15:04:05 2006"
 
 const HTMLDOCUMENTBEGIN = `
 <html>
@@ -180,12 +180,13 @@ func localRedirect(w http.ResponseWriter, r *http.Request, newPath string) {
 }
 
 func formatSize(size int64) string {
+	sizef := float64(size)
 	var i = 0
-	for size >= 1024 && i <= 4 {
-		size /= 1024
+	for sizef >= 1024 && i <= 4 {
+		sizef /= 1024
 		i++
 	}
-	return strconv.FormatInt(size, 10) + sizes[i]
+	return strconv.FormatFloat(sizef, 'f', 2, 64) + sizes[i]
 }
 
 func (handler *fileServerHandler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
@@ -247,7 +248,7 @@ func (handler *fileServerHandler) ServeHTTP(writer http.ResponseWriter, request 
 					tableItemTemplate.Execute(&folders, item{Icon: icons["directory"], Name: name, LastModified: d.ModTime().Format(DATEFORMAT), Size: "-"})
 				} else {
 					var image string
-					if fileType, found := fileTypes[filepath.Ext(d.Name())]; found {
+					if fileType, found := fileTypes[strings.ToLower(filepath.Ext(d.Name()))]; found {
 						image = icons[fileType]
 					} else {
 						image = icons["file"]
