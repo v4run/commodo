@@ -90,6 +90,7 @@ var (
 type item struct {
 	Icon         string
 	Name         string
+	Path         string
 	LastModified string
 	Size         string
 	Target       string
@@ -135,7 +136,7 @@ const TABLEEND = `
 
 const ITEM = `
 	<tr>
-		<td><img src=data:image/png;base64,{{.Icon}} /> <a href="{{.Name}}" target="{{.Target}}">{{.Name}}</a></td>
+		<td><img src=data:image/png;base64,{{.Icon}} /> <a href="{{.Path}}" target="{{.Target}}">{{.Name}}</a></td>
 		<td>{{.Size}}</td>
 		<td>{{.LastModified}}</td>
 	</tr>`
@@ -252,7 +253,7 @@ func (handler *fileServerHandler) ServeHTTP(writer http.ResponseWriter, request 
 					continue
 				}
 				if d.IsDir() {
-					tableItemTemplate.Execute(&folders, item{Icon: icons["directory"], Name: name, LastModified: d.ModTime().Format(DATEFORMAT), Size: "-", Target: "_self"})
+					tableItemTemplate.Execute(&folders, item{Icon: icons["directory"], Name: name, Path: urlEscape(name), LastModified: d.ModTime().Format(DATEFORMAT), Size: "-", Target: "_self"})
 				} else {
 					var image string
 					if fileType, found := fileTypes[strings.ToLower(filepath.Ext(d.Name()))]; found {
@@ -260,7 +261,7 @@ func (handler *fileServerHandler) ServeHTTP(writer http.ResponseWriter, request 
 					} else {
 						image = icons["file"]
 					}
-					tableItemTemplate.Execute(&files, item{Icon: image, Name: name, LastModified: d.ModTime().Format(DATEFORMAT), Size: formatSize(d.Size()), Target: "_blank"})
+					tableItemTemplate.Execute(&files, item{Icon: image, Name: name, Path: urlEscape(name), LastModified: d.ModTime().Format(DATEFORMAT), Size: formatSize(d.Size()), Target: "_blank"})
 				}
 			}
 		}
@@ -331,4 +332,55 @@ func handleExit() {
 			os.Exit(0)
 		}
 	}
+}
+
+func urlEscape(s string) string {
+	hexCount := 0
+	for i := 0; i < len(s); i++ {
+		c := s[i]
+		if shouldEscape(c) {
+			hexCount++
+		}
+	}
+
+	if hexCount == 0 {
+		return s
+	}
+
+	t := make([]byte, len(s)+2*hexCount)
+	j := 0
+	for i := 0; i < len(s); i++ {
+		switch c := s[i]; {
+		case shouldEscape(c):
+			t[j] = '%'
+			t[j+1] = "0123456789ABCDEF"[c>>4]
+			t[j+2] = "0123456789ABCDEF"[c&15]
+			j += 3
+		default:
+			t[j] = s[i]
+			j++
+		}
+	}
+	return string(t)
+}
+
+func shouldEscape(c byte) bool {
+	// §2.3 Unreserved characters (alphanum)
+	if 'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z' || '0' <= c && c <= '9' {
+		return false
+	}
+
+	switch c {
+	case '-', '_', '.', '~': // §2.3 Unreserved characters (mark)
+		return false
+
+	case '$', '&', '+', ',', '/', ':', ';', '=', '?', '@': // §2.2 Reserved characters (reserved)
+		// Different sections of the URL allow a few of
+		// the reserved characters to appear unescaped.
+		// The RFC reserves (so we must escape) everything.
+		return true
+	}
+
+	// Everything else must be escaped.
+	return true
 }
