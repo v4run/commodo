@@ -149,6 +149,24 @@ const (
 	COMMAND = "commodo"
 )
 
+const NOTFOUND = `
+<html>
+	<head>
+		<title>404 | Not Found</title>
+		<style>
+		body {margin: 0; padding-top: 10px; background-color: #edece4; font-family: Tahoma, Geneva, sans-serif; color: #4d4d4d}
+		.contents {margin: 0 auto; padding: 40px 80px; text-align: center; background-color: #fff; border: solid 1px #d9d8d4; width: 400px;}
+		</style>
+	</head>
+	<body>
+        <div class = "contents">
+        	<h1>404</h1>
+        	<h2>Not Found</h2>
+        </div>
+	</body>
+</html>
+`
+
 func init() {
 	flag.StringVar(&dir, "d", getHomeDir(), "The root directory for the file server.")
 	flag.StringVar(&dir, "directory", getHomeDir(), "The root directory for the file server.")
@@ -207,13 +225,15 @@ func (handler *fileServerHandler) ServeHTTP(writer http.ResponseWriter, request 
 
 	f, openErr := handler.root.Open(path.Clean(requestedPath))
 	if openErr != nil {
-		http.Error(writer, "404 Page not found.", http.StatusNotFound)
+		writer.WriteHeader(http.StatusNotFound)
+		fmt.Fprintf(writer, NOTFOUND)
 		return
 	}
 
 	dir, statErr := f.Stat()
 	if statErr != nil {
-		http.Error(writer, "404 Page not found.", http.StatusNotFound)
+		writer.WriteHeader(http.StatusNotFound)
+		fmt.Fprintf(writer, NOTFOUND)
 		return
 	}
 	defer f.Close()
